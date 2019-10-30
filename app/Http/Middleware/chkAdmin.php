@@ -1,0 +1,32 @@
+<?php
+
+namespace App\Http\Middleware;
+
+
+use Closure;
+use Illuminate\Support\Facades\Auth;
+
+class chkAdmin
+{
+    /**
+     * Handle an incoming request.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure $next
+     * @return mixed
+     */
+    public function handle($request, Closure $next)
+    {
+        //$userRole = Auth::user()->roles->first()->id;
+        if (Auth::user()->isAdmin(3)) {
+            return $next($request);
+        }
+        return redirect('home');
+
+    }
+
+}
+
+
+
+
